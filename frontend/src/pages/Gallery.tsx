@@ -3,6 +3,10 @@ import { useState, useEffect } from 'react'
 import { getPaintings } from '../api/paintings'
 import PaintingModal from '../components/UI/PaintingModal'
 
+// Правильный путь: одна точка ../
+import checkboxEmpty from '../assets/checkbox-empty.png'
+import checkboxFilled from '../assets/checkbox-filled.png'
+
 const STORAGE_KEY = 'tretyakov_studied_ids'
 
 export default function GalleryPage() {
@@ -34,7 +38,7 @@ export default function GalleryPage() {
 
   return (
     <div style={{ padding: '24px 16px' }}>
-      <h1 style={{ fontSize: '24px', color: 'var(--color-primary)', marginBottom: '16px', textAlign: 'center' }}>🖼️ Галерея</h1>
+      <h1 style={{ fontSize: '24px', color: 'var(--color-primary)', marginBottom: '16px', textAlign: 'center' }}>️ Галерея</h1>
       
       <div style={{ display: 'flex', gap: '8px', overflowX: 'auto', marginBottom: '20px', paddingBottom: '4px' }}>
         {genres.map(g => (
@@ -81,25 +85,28 @@ export default function GalleryPage() {
                   <p style={{ fontSize: '11px', color: 'var(--color-text-muted)' }}>{painting.year_created} г.</p>
                 </div>
                 
-                {/* Чекбокс в галерее */}
+                {/* --- ТВОЯ КАСТОМНАЯ ИКОНКА ЧЕКБОКСА --- */}
                 <button
                   onClick={(e) => { e.stopPropagation(); toggleStudied(painting.id) }}
                   style={{
                     position: 'absolute', top: '8px', right: '8px',
-                    background: 'white', borderRadius: '50%', width: '28px', height: '28px',
+                    background: 'white', borderRadius: '50%', width: '32px', height: '32px',
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    boxShadow: '0 2px 8px rgba(0,0,0,0.15)', fontSize: '14px', cursor: 'pointer', zIndex: 10,
-                    border: isStudied ? '2px solid #2e7d32' : '2px solid var(--color-border)'
+                    boxShadow: '0 2px 8px rgba(0,0,0,0.15)', cursor: 'pointer', zIndex: 10,
+                    border: 'none', padding: '4px'
                   }}
                 >
-                  {isStudied ? '✅' : '☐'}
+                  <img 
+                    src={isStudied ? checkboxFilled : checkboxEmpty} 
+                    alt="checkbox"
+                    style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+                  />
                 </button>
               </div>
             )
           })}
         </div>
       )}
-
       <PaintingModal painting={selectedPainting} onClose={() => setSelectedPainting(null)} />
     </div>
   )
