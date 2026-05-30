@@ -3,7 +3,7 @@ import asyncpg
 import json
 
 DB_URL = "postgresql://diana@localhost:5432/tretyakov"
-BASE_URL = "http://localhost:8000/static/paintings"
+BASE_URL = "/paintings"
 
 ARTISTS_AND_PAINTINGS = [
     {
