@@ -22,12 +22,30 @@
 }
 
 body {
-  background: var(--color-bg);
+  /* Подключаем твою фоновую картинку */
+  background-image: url('./assets/bg.jpg'); /* <-- ЗАМЕНИ ИМЯ ФАЙЛА */
+  background-size: cover;       /* Растягивает картинку на весь экран */
+  background-position: center;  /* Центрирует */
+  background-repeat: no-repeat;
+  background-attachment: fixed; /* Фон стоит на месте при прокрутке */
+  
+  /* Если картинка не загрузится, будет этот цвет */
+  background-color: #F5F0E8;
+  
   color: var(--color-text);
-  font-family: 'Georgia', serif;
+  font-family: 'Arial', sans-serif;
   overflow-x: hidden;
   max-width: 480px;
   margin: 0 auto;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Делаем карточки полупрозрачными (эффект стекла), чтобы текст читался */
+.menu-card, 
+.painting-card, 
+.modal-content {
+  background: rgba(255, 255, 255, 0.92) !important;
+  backdrop-filter: blur(5px); /* Размытие фона под карточкой */
 }
 
 button {
