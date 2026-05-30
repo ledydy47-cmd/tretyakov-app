@@ -1,10 +1,15 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager
+from app.db.database import engine, Base
+import app.models  # Импортируем все модели чтобы они зарегистрировались
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    print("🚀 Сервер запущен!")
+    print("🚀 Сервер запускается...")
+    async with engine.begin() as conn:
+        await conn.run_sync(Base.metadata.create_all)
+        print("✅ Таблицы созданы в базе данных!")
     yield
     print("🛑 Сервер остановлен")
 

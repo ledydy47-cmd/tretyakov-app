@@ -1,12 +1,19 @@
-fastapi==0.111.0
-uvicorn[standard]==0.29.0
-sqlalchemy[asyncio]==2.0.30
-asyncpg==0.29.0
-alembic==1.13.1
-pydantic==2.7.1
-pydantic-settings==2.2.1
-python-jose==3.3.0
-httpx==0.27.0
-boto3==1.34.0
-python-multipart==0.0.9
-aiogram==3.6.0
+from pydantic_settings import BaseSettings
+from pathlib import Path
+
+# Путь к .env файлу — ищем его в корне проекта
+ENV_PATH = Path(__file__).parent.parent.parent / ".env"
+
+class Settings(BaseSettings):
+    DATABASE_URL: str
+    BOT_TOKEN: str
+    SECRET_KEY: str
+    CLOUDFLARE_R2_URL: str
+    CLOUDFLARE_R2_KEY: str
+    CLOUDFLARE_R2_SECRET: str
+    CLOUDFLARE_R2_BUCKET: str = "tretyakov-paintings"
+
+    class Config:
+        env_file = str(ENV_PATH)
+
+settings = Settings()
