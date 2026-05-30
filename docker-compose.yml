@@ -1,0 +1,41 @@
+version: '3.9'
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: tretyakov_db
+    restart: always
+    environment:
+      POSTGRES_DB: tretyakov
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  backend:
+    build: ./backend
+    container_name: tretyakov_backend
+    restart: always
+    environment:
+      DATABASE_URL: postgresql+asyncpg://admin:${DB_PASSWORD}@postgres:5432/tretyakov
+      BOT_TOKEN: ${BOT_TOKEN}
+      SECRET_KEY: ${SECRET_KEY}
+      CLOUDFLARE_R2_URL: ${CLOUDFLARE_R2_URL}
+      CLOUDFLARE_R2_KEY: ${CLOUDFLARE_R2_KEY}
+      CLOUDFLARE_R2_SECRET: ${CLOUDFLARE_R2_SECRET}
+    ports:
+      - "8000:8000"
+    depends_on:
+      - postgres
+
+  frontend:
+    build: ./frontend
+    container_name: tretyakov_frontend
+    restart: always
+    ports:
+      - "5173:5173"
+
+volumes:
+  postgres_data:
