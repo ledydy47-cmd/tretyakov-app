@@ -2,14 +2,16 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager
 from app.db.database import engine, Base
-import app.models  # Импортируем все модели чтобы они зарегистрировались
+import app.models
+
+from app.routers import paintings, artists
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     print("🚀 Сервер запускается...")
     async with engine.begin() as conn:
         await conn.run_sync(Base.metadata.create_all)
-        print("✅ Таблицы созданы в базе данных!")
+        print("✅ Таблицы созданы!")
     yield
     print("🛑 Сервер остановлен")
 
@@ -26,6 +28,9 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+app.include_router(paintings.router)
+app.include_router(artists.router)
 
 @app.get("/health")
 async def health():
