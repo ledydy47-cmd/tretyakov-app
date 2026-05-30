@@ -121,20 +121,21 @@ export default function QuizRunPage() {
           transition={{ duration: 0.3 }}
         >
           {/* Картина */}
-          {question.question_type === 'title' && (
-            <div style={{
-              border: '6px solid var(--color-gold)',
-              borderRadius: '12px',
-              overflow: 'hidden',
-              marginBottom: '16px',
-            }}>
-              <img
-                src={question.image_url}
-                alt="Угадай картину"
-                style={{ width: '100%', height: '240px', objectFit: 'cover', display: 'block' }}
-              />
-            </div>
-          )}
+{(
+  <div style={{
+    border: '6px solid var(--color-gold)',
+    borderRadius: '12px',
+    overflow: 'hidden',
+    marginBottom: '16px',
+  }}>
+    <img
+      src={question.image_url}
+      alt="Угадай картину"
+      style={{ width: '100%', height: '240px', objectFit: 'cover', display: 'block' }}
+    />
+  </div>
+)}
+
 
           {/* Вопрос */}
           <div style={{
