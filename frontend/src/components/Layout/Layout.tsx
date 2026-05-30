@@ -8,7 +8,8 @@ export default function Layout() {
   { path: '/',        icon: '🏛️',  label: 'Главная' },
   { path: '/gallery', icon: '🖼️',  label: 'Галерея' },
   { path: '/study',   icon: '📖',  label: 'Изучение' },
-  { path: '/quiz',    icon: '✏️',  label: 'Тесты' }, // ← должно быть именно /quiz
+  { path: '/quiz',    icon: '✏️',  label: 'Тесты' },
+  { path: '/profile', icon: '👤',  label: 'Профиль' }, // ← Добавили эту строку
 ]
 
   return (

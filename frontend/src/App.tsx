@@ -6,11 +6,10 @@ import GalleryPage from './pages/Gallery'
 import StudyPage from './pages/Study'
 import QuizPage from './pages/Quiz'
 import QuizRunPage from './pages/QuizRun'
+import ProfilePage from './pages/Profile' // ← Добавили
 
 const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: { retry: 1, staleTime: 5 * 60 * 1000 }
-  }
+  defaultOptions: { queries: { retry: 1, staleTime: 5 * 60 * 1000 } }
 })
 
 export default function App() {
@@ -24,6 +23,7 @@ export default function App() {
             <Route path="/study" element={<StudyPage />} />
             <Route path="/quiz" element={<QuizPage />} />
             <Route path="/quiz/run" element={<QuizRunPage />} />
+            <Route path="/profile" element={<ProfilePage />} /> {/* ← Добавили */}
           </Route>
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
