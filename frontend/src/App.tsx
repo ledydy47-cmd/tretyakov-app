@@ -1,0 +1,31 @@
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import Layout from './components/Layout/Layout'
+import HomePage from './pages/Home'
+import GalleryPage from './pages/Gallery'
+import StudyPage from './pages/Study'
+import QuizPage from './pages/Quiz'
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: { retry: 1, staleTime: 5 * 60 * 1000 }
+  }
+})
+
+export default function App() {
+  return (
+    <QueryClientProvider client={queryClient}>
+      <BrowserRouter>
+        <Routes>
+          <Route element={<Layout />}>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/gallery" element={<GalleryPage />} />
+            <Route path="/study" element={<StudyPage />} />
+            <Route path="/quiz" element={<QuizPage />} />
+          </Route>
+          <Route path="*" element={<Navigate to="/" />} />
+        </Routes>
+      </BrowserRouter>
+    </QueryClientProvider>
+  )
+}

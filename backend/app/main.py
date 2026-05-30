@@ -1,9 +1,9 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 from contextlib import asynccontextmanager
 from app.db.database import engine, Base
 import app.models
-
 from app.routers import paintings, artists
 
 @asynccontextmanager
@@ -28,6 +28,9 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# Отдаём картины как статические файлы
+app.mount("/static", StaticFiles(directory="static"), name="static")
 
 app.include_router(paintings.router)
 app.include_router(artists.router)
