@@ -56,7 +56,7 @@ export default function QuizPage() {
         {quizTypes.map((quiz, i) => (
           <div
             key={i}
-            onClick={() => alert('Тесты скоро будут доступны! 🎨')}
+            onClick={() => navigate('/quiz/run')}
             style={{
               background: 'white',
               borderRadius: '16px',

@@ -4,7 +4,8 @@ from fastapi.staticfiles import StaticFiles
 from contextlib import asynccontextmanager
 from app.db.database import engine, Base
 import app.models
-from app.routers import paintings, artists
+from app.routers import paintings, artists, quiz
+
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -34,6 +35,8 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 
 app.include_router(paintings.router)
 app.include_router(artists.router)
+app.include_router(quiz.router)
+
 
 @app.get("/health")
 async def health():

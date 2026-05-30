@@ -5,6 +5,7 @@ import HomePage from './pages/Home'
 import GalleryPage from './pages/Gallery'
 import StudyPage from './pages/Study'
 import QuizPage from './pages/Quiz'
+import QuizRunPage from './pages/QuizRun'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -22,6 +23,7 @@ export default function App() {
             <Route path="/gallery" element={<GalleryPage />} />
             <Route path="/study" element={<StudyPage />} />
             <Route path="/quiz" element={<QuizPage />} />
+            <Route path="/quiz/run" element={<QuizRunPage />} />
           </Route>
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
