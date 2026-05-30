@@ -5,11 +5,11 @@ export default function Layout() {
   const location = useLocation()
 
   const tabs = [
-    { path: '/',        icon: '🏛️',  label: 'Главная' },
-    { path: '/gallery', icon: '🖼️',  label: 'Галерея' },
-    { path: '/study',   icon: '📖',  label: 'Изучение' },
-    { path: '/quiz',    icon: '✏️',  label: 'Тесты' },
-  ]
+  { path: '/',        icon: '🏛️',  label: 'Главная' },
+  { path: '/gallery', icon: '🖼️',  label: 'Галерея' },
+  { path: '/study',   icon: '📖',  label: 'Изучение' },
+  { path: '/quiz',    icon: '✏️',  label: 'Тесты' }, // ← должно быть именно /quiz
+]
 
   return (
     <div style={{ paddingBottom: '80px', minHeight: '100vh' }}>

@@ -1,9 +1,12 @@
 import { useQuery } from '@tanstack/react-query'
 import { useNavigate } from 'react-router-dom'
+import { useState } from 'react'
 import { getPaintings } from '../api/paintings'
+import PaintingModal from '../components/UI/PaintingModal'
 
 export default function HomePage() {
   const navigate = useNavigate()
+  const [selectedPainting, setSelectedPainting] = useState<any | null>(null)
 
   const { data, isLoading } = useQuery({
     queryKey: ['paintings'],
@@ -41,7 +44,7 @@ export default function HomePage() {
         <button className="btn-primary" onClick={() => navigate('/study')}>
           📖 Начать изучение
         </button>
-        <button className="btn-outline" onClick={() => navigate('/quiz')}>
+        <button className="btn-outline" onClick={() => navigate('/quiz/run')}>
           ✏️ Пройти тест
         </button>
       </div>
@@ -67,7 +70,7 @@ export default function HomePage() {
             {data?.items?.map((painting: any) => (
               <div
                 key={painting.id}
-                onClick={() => navigate(`/study`)}
+                onClick={() => setSelectedPainting(painting)}
                 style={{
                   display: 'flex',
                   gap: '12px',
@@ -99,6 +102,14 @@ export default function HomePage() {
                   </p>
                   <p style={{
                     fontSize: '12px',
+                    color: 'var(--color-primary)',
+                    fontStyle: 'italic',
+                    marginBottom: '2px',
+                  }}>
+                    {painting.artist_name}
+                  </p>
+                  <p style={{
+                    fontSize: '12px',
                     color: 'var(--color-text-muted)',
                   }}>
                     {painting.year_created} г.
@@ -109,6 +120,12 @@ export default function HomePage() {
           </div>
         )}
       </div>
+
+      {/* Модальное окно */}
+      <PaintingModal
+        painting={selectedPainting}
+        onClose={() => setSelectedPainting(null)}
+      />
     </div>
   )
 }
